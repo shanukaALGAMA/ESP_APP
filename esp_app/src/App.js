@@ -4,6 +4,7 @@ import axios from 'axios';
 function App() {
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState('');
+  const [chat, setChat] =useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,6 +16,19 @@ function App() {
       setStatus('Error sending message');
       console.error(error);
     }
+  };
+
+  const handleFetch = async (e) => {
+    e.preventDefault();
+    try {
+      const response1 = await axios.get('https://message-server-pi.vercel.app/api/messages');
+      setChat(response1.data.message);
+      console.info(chat);
+    }catch(error){
+      setChat('Error sending message');
+      console.error(error);
+    }
+    
   };
 
   return (
@@ -33,6 +47,10 @@ function App() {
         </button>
       </form>
       {status && <p>{status}</p>}
+      <button onClick={handleFetch} type="fetch" style={{ padding: '8px 16px', marginLeft: '10px' }}> 
+        fetch
+      </button>
+      {chat && <p>{chat}</p>}
     </div>
   );
 }
