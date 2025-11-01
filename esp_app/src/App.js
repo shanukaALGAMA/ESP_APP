@@ -9,7 +9,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://dht-moist-lcd.vercel.app/api/messages', { message });
+      const response = await axios.post('https://message-server-pi.vercel.app/api/messages', { message });
       setStatus(`Message sent: ${response.data.message}`);
       setMessage('');
     } catch (error) {
@@ -21,7 +21,7 @@ function App() {
   const handleFetch = async (e) => {
     e.preventDefault();
     try {
-      const response1 = await axios.get('https://dht-moist-lcd.vercel.app/api/messages');
+      const response1 = await axios.get('https://message-server-pi.vercel.app/api/messages');
       setChat(response1.data.message);
       console.info(chat);
     }catch(error){
